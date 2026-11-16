@@ -1,0 +1,15 @@
+{
+  "name": "otel-demo-tests-11-ui",
+  "private": true,
+  "description": "Cypress UI tests for the OpenTelemetry demo storefront",
+  "scripts": {
+    "test": "cypress run",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.21",
+    "currency-symbol-map": "5.1.0",
+    "cypress": "16.1.0",
+    "typescript": "6.0.3"
+  }
+}
