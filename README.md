@@ -1,6 +1,6 @@
 # otel-demo-tests-11-ui
 
-Cypress UI tests for the [OpenTelemetry demo](https://github.com/open-telemetry/opentelemetry-demo) storefront. 4 specs, 9 tests.
+Cypress UI tests for the [OpenTelemetry demo](https://github.com/open-telemetry/opentelemetry-demo) storefront. 509 tests: 9 hand-written in `cypress/e2e/`, and 500 generated in `cypress/e2e/generated/`.
 
 This repo owns the UI. A test that drives the storefront in a browser belongs here, whatever area of the API the change touches. API tests belong in the area repos:
 
@@ -20,6 +20,20 @@ This repo owns the UI. A test that drives the storefront in a browser belongs he
 
 The specs were moved here from the demo's `src/frontend/cypress/`. The demo's `data-cy` names are copied in `cypress/support/fields.ts`: keep them in step with `src/frontend/utils/enums/CypressFields.ts` in the demo.
 
+## Generated tests
+
+`cypress/e2e/generated/` holds 500 tests from `generate_ui.py` in otel-testbot: seven templates of storefront behavior, repeated across the demo's 10 products and 33 currencies under distinct names. Regenerate rather than editing them by hand. All 500 pass at the fixture base.
+
+| Spec | Tests | Checks |
+|---|---|---|
+| `u01_home_currency_switch` | 40 | the currency switcher reprices the catalog |
+| `u02_home_session_currency` | 40 | a stored session currency is selected on load |
+| `u03_product_detail` | 40 | a product page renders, with 4 recommendations |
+| `u04_product_price_currency` | 330 | a product page shows the API's price in each currency |
+| `u05_add_to_cart` | 10 | adding a product opens the cart with 1 item |
+| `u06_home_card_opens_detail` | 20 | a product card opens its product page |
+| `u07_home_lists_product` | 20 | the catalog lists each product |
+
 ## Run
 
 ```sh
@@ -31,7 +45,7 @@ OTEL_DEMO_URL=http://localhost:8080 npx cypress run
 
 ## Known failures at the fixture base
 
-Against pellepedro-testbot/opentelemetry-demo at aa8f9c9 (eval/repo62-base), 4 of the 9 tests pass. The 5 below failed there before the move too, with the same errors:
+Against pellepedro-testbot/opentelemetry-demo at aa8f9c9 (eval/repo62-base), 504 of the 509 tests pass. The 5 that fail are hand-written specs that failed there before the move too, with the same errors:
 
 - `Checkout.cy.ts`: should create an order with two items
 - `CheckoutPaymentFailure.cy.ts`: both tests (the base answers 200, not 422 or 500)
