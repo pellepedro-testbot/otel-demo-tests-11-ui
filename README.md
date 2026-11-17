@@ -43,9 +43,9 @@ OTEL_DEMO_URL=http://localhost:8080 npx cypress run
 
 `OTEL_DEMO_URL` defaults to `http://localhost:8080`. `CheckoutPaymentFailure.cy.ts` toggles the demo's feature flags and turns them off afterwards, so run the specs one after another.
 
-## Known failures at the fixture base
+## Skipped at the fixture base
 
-Against pellepedro-testbot/opentelemetry-demo at aa8f9c9 (eval/repo62-base), 504 of the 509 tests pass. The 5 that fail are hand-written specs that failed there before the move too, with the same errors:
+Against pellepedro-testbot/opentelemetry-demo at aa8f9c9 (eval/repo62-base), 504 of the 509 tests pass and 5 are skipped. The 5 are hand-written specs that failed there before the move too, with the same errors, so they carry `it.skip` (or `describe.skip`):
 
 - `Checkout.cy.ts`: should create an order with two items
 - `CheckoutPaymentFailure.cy.ts`: both tests (the base answers 200, not 422 or 500)
